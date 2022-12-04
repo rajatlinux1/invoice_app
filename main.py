@@ -2,7 +2,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
-import data, re, qrcode
+import data, re, qrcode, os
 from datetime import datetime, date, timedelta
 today_date = date.today()
 now = datetime.now()
@@ -65,7 +65,8 @@ c.setAuthor="By_Replit"
 
 def top():
     c.setFillColor('black')
-    c.setFont("nutellaBold", 10)
+    # c.setFont("nutellaBold", 10)
+    c.setFont("Helvetica-Bold", 8)
     c.drawRightString(right_side-40, 720, invoice_number)
 
     c.drawImage("invoice_logo.jpg", left_side, 750, width=130, height=50)
@@ -226,4 +227,5 @@ c.setFont("Helvetica-Bold", 8)
 c.drawCentredString(w/2, bottom+12, web_site)
 
 c.save()
+os.remove(f"{qr_code}")
 print("Saved!")
