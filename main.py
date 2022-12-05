@@ -9,44 +9,29 @@ now = datetime.now()
 
 
 #---------------------------------------------------------------------------------------------------
-term_days = data.term_days
-company_name = data.company_name
-web_site = data.web_site
-company_address = data.company_address
-to_address = data.customer_address
-customer_name = data.customer_name
-customer_phone = data.customer_phone
-invoice_number = data.invoice_number
+term_days = data.TERM_DAYS
+company_name = data.COMPANY_NAME
+web_site = data.WEB_SITE
+company_address = data.COMPANY_ADDRESS
+to_address = data.CUSTOMER_ADDRESS
+customer_name = data.CUSTOMER_NAME
+customer_phone = data.CUSTOMER_PHONE
+invoice_number = data.INVOICE_NUMBER
 to_address = (re.sub("(.{35})", "\\1\n", to_address, 0, re.DOTALL))
-
-
-    # updated_strapline = ""
-    # strap_line = list_obj.strapline
-
-    # if strap_line and len(strap_line) > 50:
-    #     for i, data in enumerate(strap_line):
-
-    #         if i > 0 and (i % 50) == 0:
-    #             updated_strapline += data+'\n'
-    #         else:
-    #             updated_strapline += data
-    # else:
-    #     updated_strapline = strap_line
-
-
+upi_id = data.UPI_ID
 #---------------------------------------------------------------------------------------------------
 
 current_time = now.strftime("%H:%M")
 current_date = today_date.strftime("%b %d, %Y")
-due_date = (today_date + timedelta(days = term_days)).strftime("%b %d, %Y")
+due_date = (today_date + timedelta(days = data.TERM_DAYS)).strftime("%b %d, %Y")
 
 
 
 pdfmetrics.registerFont(TTFont('GreatVibes-Regular', 'GreatVibes-Regular.ttf')) #Thank-you
-pdfmetrics.registerFont(TTFont('nutellaBold', 'nutellaBold.ttf')) #INVOICE
+# pdfmetrics.registerFont(TTFont('nutellaBold', 'nutellaBold.ttf')) #INVOICE
 
 w, h = A4
-invoice_number = f"#-{invoice_number}"
+invoice_number = f"#-{data.INVOICE_NUMBER}"
 
 
 both_side_margin = 60
@@ -83,8 +68,8 @@ def top():
 
     #Bill_to_address
     c.setFont("Helvetica-Bold", 10)
-    c.drawString(left_side+40, 650, customer_name)
-    c.drawString(left_side, 635, str(customer_phone))
+    c.drawString(left_side+40, 650, data.CUSTOMER_NAME)
+    c.drawString(left_side, 635, str(data.CUSTOMER_PHONE))
 
     c.setFont("Helvetica", 10)
     text = c.beginText(left_side, 620)
@@ -95,7 +80,7 @@ def top():
     #Invoice Date
     c.drawRightString(right_side, 650, current_date)
     #Terms
-    c.drawRightString(right_side, 620, f"{str(term_days)} Days")
+    c.drawRightString(right_side, 620, f"{str(data.TERM_DAYS)} Days")
     #Due Date:
     c.drawRightString(right_side, 590, due_date)
 
@@ -123,13 +108,13 @@ next_index = 1
 Sr_No = 1
 next_page_list = [28, 28*2, 28*3, 28*4, 28*5, 28*6, 28*7, 28*8, 28*9, 28*10]
 
-for data in data.data:
+for item in data.items:
     down = downward-(item_down*counter)
-    c.drawString(left_side + 20, down, f"{Sr_No} - {data[0]}") #ITEM_DESCRIPTION
-    c.drawCentredString(left_side + 270, down, f"{data[1]}") #PRICE
-    c.drawCentredString(left_side + 356, down, f"{data[2]}") #QTY
-    c.drawCentredString(left_side + 435, down, f"{data[1]*data[2]}") #TOTAL
-    total_price = total_price+(data[1]*data[2])
+    c.drawString(left_side + 20, down, f"{Sr_No} - {item[0]}") #ITEM_DESCRIPTION
+    c.drawCentredString(left_side + 270, down, f"{item[1]}") #PRICE
+    c.drawCentredString(left_side + 356, down, f"{item[2]}") #QTY
+    c.drawCentredString(left_side + 435, down, f"{item[1]*item[2]}") #TOTAL
+    total_price = total_price+(item[1]*item[2])
     counter += 1
     next_index += 1
     Sr_No += 1
@@ -144,9 +129,9 @@ for data in data.data:
         c.drawCentredString(w/2, 60, "Thank you")
         c.setFont("Helvetica", 10)
         c.line(left_side, bottom+25, right_side, bottom+25)
-        c.drawCentredString(w/2, bottom, company_address)
+        c.drawCentredString(w/2, bottom, data.COMPANY_ADDRESS)
         c.setFont("Helvetica-Bold", 8)
-        c.drawCentredString(w/2, bottom+12, web_site)
+        c.drawCentredString(w/2, bottom+12, data.WEB_SITE)
 
         j=1
         c.showPage()
@@ -192,9 +177,9 @@ c.drawRightString(right_side-25, pointer-75, str(grand_total))
 
 
 #Signature
-c.drawRightString(right_side-5, pointer-145, "Peter Parker")
+c.drawRightString(right_side-5, pointer-145, data.ACCOUNTANT)
 c.setFont("Helvetica", 10)
-c.drawRightString(right_side-5, pointer-155, "Manager")
+c.drawRightString(right_side-5, pointer-155, data.ACCOUNTANT_POSTION)
 c.rect(left_side+345, pointer-160, 130, 60)
 
 
@@ -212,7 +197,7 @@ c.drawString(left_side, pointer-60, "UPI:")
 c.drawString(left_side, pointer-75, "QR CODE:")
 c.setFont("Helvetica", 10)
 c.drawString(left_side+50, pointer-45, "Visa, MasterCard, Cheque")
-c.drawString(left_side+25, pointer-60, "sxtsd@pay")
+c.drawString(left_side+25, pointer-60, data.UPI_ID)
 c.drawImage(qr_code, left_side, pointer-160, width=80, height=80) #QR-CODE
 
 
@@ -222,9 +207,9 @@ c.drawCentredString(w/2, 60, "Thank you")
 
 c.setFont("Helvetica", 10)
 c.line(left_side, bottom+25, right_side, bottom+25)
-c.drawCentredString(w/2, bottom, company_address)
+c.drawCentredString(w/2, bottom, data.COMPANY_ADDRESS)
 c.setFont("Helvetica-Bold", 8)
-c.drawCentredString(w/2, bottom+12, web_site)
+c.drawCentredString(w/2, bottom+12, data.WEB_SITE)
 
 c.save()
 os.remove(f"{qr_code}")
