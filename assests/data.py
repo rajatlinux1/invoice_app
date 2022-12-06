@@ -1,4 +1,4 @@
-items = [
+ITEMS = [
     ["Solar Plate", 250.0, 2],
     ["Bettry", 355.0, 1],
     ["Bulb", 99.9, 4],

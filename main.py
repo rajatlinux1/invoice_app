@@ -2,8 +2,9 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
-import data, re, qrcode, os
+import assests.data as data, re, qrcode, os
 from datetime import datetime, date, timedelta
+# from .assests import data
 today_date = date.today()
 now = datetime.now()
 
@@ -27,7 +28,7 @@ due_date = (today_date + timedelta(days = data.TERM_DAYS)).strftime("%b %d, %Y")
 
 
 
-pdfmetrics.registerFont(TTFont('GreatVibes-Regular', 'GreatVibes-Regular.ttf')) #Thank-you
+pdfmetrics.registerFont(TTFont('GreatVibes-Regular', 'assests/GreatVibes-Regular.ttf')) #Thank-you
 # pdfmetrics.registerFont(TTFont('nutellaBold', 'nutellaBold.ttf')) #INVOICE
 
 w, h = A4
@@ -54,8 +55,8 @@ def top():
     c.setFont("Helvetica-Bold", 8)
     c.drawRightString(right_side-40, 720, invoice_number)
 
-    c.drawImage("invoice_logo.jpg", left_side, 750, width=130, height=50)
-    c.drawImage("happy_shop.jpg", 430, 730, width=90, height=80) #shop-logo
+    c.drawImage("assests/invoice_logo.jpg", left_side, 750, width=130, height=50)
+    c.drawImage("assests/happy_shop.jpg", 430, 730, width=90, height=80) #shop-logo
 
 
     c.setFont("Helvetica-Bold", 10)
@@ -108,7 +109,7 @@ next_index = 1
 Sr_No = 1
 next_page_list = [28, 28*2, 28*3, 28*4, 28*5, 28*6, 28*7, 28*8, 28*9, 28*10]
 
-for item in data.items:
+for item in data.ITEMS:
     down = downward-(item_down*counter)
     c.drawString(left_side + 20, down, f"{Sr_No} - {item[0]}") #ITEM_DESCRIPTION
     c.drawCentredString(left_side + 270, down, f"{item[1]}") #PRICE
