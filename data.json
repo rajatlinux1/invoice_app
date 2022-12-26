@@ -1,0 +1,19 @@
+{
+    "CUSTOMER_NAME":"John Smith", 
+    "CUSTOMER_ADDRESS":"X-27, Industrial Area,Okhla Industrial Estate,New Delhi, Delhi 110020", 
+    "CUSTOMER_PHONE":"0123456789", 
+    "TERM_DAYS":30, 
+    "COMPANY_NAME":"West Repair Inc.",
+    "WEB_SITE":"www.westernrepair.com",
+    "COMPANY_ADDRESS":"X-27, Industrial Area,Okhla Industrial Estate,New Delhi, Delhi 110020",
+    "INVOICE_NUMBER":12345,
+    "UPI_ID":"name123@bank",
+    "CASHIER_NAME":"Peter Parker",
+    "AMOUNT_IN_WORK":"ONE THOUSAND FIVE HUNDRED SEVENTY THREE",
+    "DATA":[
+        ["Solar Plate", 250.0, 2],
+        ["Bettry", 355.0, 1],
+        ["Bulb", 99.9, 4],
+        ["led", 150, 8]
+    ]
+}
