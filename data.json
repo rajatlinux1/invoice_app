@@ -9,7 +9,7 @@
     "INVOICE_NUMBER":12345,
     "UPI_ID":"name123@bank",
     "CASHIER_NAME":"Peter Parker",
-    "AMOUNT_IN_WORK":"ONE THOUSAND FIVE HUNDRED SEVENTY THREE",
+    "AMOUNT_IN_WORD":"ONE THOUSAND FIVE HUNDRED SEVENTY THREE",
     "DATA":[
         ["Solar Plate", 250.0, 2],
         ["Bettry", 355.0, 1],
